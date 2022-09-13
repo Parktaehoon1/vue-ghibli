@@ -1,26 +1,58 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+<div class="wrap">
+  <div class="container">
+  <RouterView /> 
+  </div>
+</div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+  import { useStore } from 'vuex';
+  export default {
+    components:{
+    },
+    setup() {
+      // vuex에 dispatch 전송
+      const store = useStore();
+      // 각각의 페이지에서 자료 호출 한건지ㅎㅎ
+      store.dispatch('fetchMovieList')
+      return {
 
-export default {
-  name: 'App',
-  components: {
-    HelloWorld
+      }
+    }
   }
-}
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+ul, li{
+  list-style: none;
+}
+a{
+  color: #333;
+  text-decoration: none;
+}
+html{
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  font-size: 16px;
+  background: #eff3f7;
+}
+
+.wrap{ 
+  position: absolute;
+  left: 0;
+  top: 0;
+  display: block;
+}
+.container{
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  /* width: 100%; */
 }
 </style>
