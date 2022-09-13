@@ -5,16 +5,16 @@ const router = createRouter({
   history: createWebHistory(),
   routes: [
     {
-      path: '/',
+      path: '/page-ghibli/home',
       redirect: '/home'
     },
     {
-      path: '/home',
+      path: '/page-ghibli/',
       // RouterView 에 보여줄 페이지(컴포넌트 이름)
       component: HomeView
     },
     {
-      path: '/detail/:id',
+      path: '/page-ghibli/detail/:id',
       component: DetailView
     }
   ]
