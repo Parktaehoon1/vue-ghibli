@@ -1,33 +1,37 @@
 <template>
-    <div class="movie-box" :style="{
-        backgroundImage: `url(${movieInfo.movie_banner})`,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center'
-    }">
-        <a class="a-back" @click.stop="back">all list</a>
-        <div class="movie-detail">
-            <img class="movie-image" :src="movieInfo.image">
-            <div class="movie-info-wrap">
+    <div>
+        <div class="movie-box">
+            <a class="a-back" @click.stop="back">all list</a>
+            <div class="movie-detail">
+                <img class="movie-image" :src="movieInfo.image">
+                <div class="movie-info-wrap">
 
-                <h2 class="movie-title">{{movieInfo.title}} <small>{{movieInfo.original_title}}</small></h2>
+                    <h2 class="movie-title">{{movieInfo.title}} <small>{{movieInfo.original_title}}</small></h2>
 
-                <p class="movie-info">
-                    Release Date : {{movieInfo.release_date}}년<br />
-                    Director : {{movieInfo.director}}<br />
-                    Producer : {{movieInfo.producer}}<br />
-                    Running Time : {{movieInfo.running_time}}분
-                </p>
-                <p class="movie-desc">
-                    {{movieInfo.description}}
-                </p>
+                    <p class="movie-info">
+                        Release Date : {{movieInfo.release_date}}년<br />
+                        Director : {{movieInfo.director}}<br />
+                        Producer : {{movieInfo.producer}}<br />
+                        Running Time : {{movieInfo.running_time}}분
+                    </p>
+                    <p class="movie-desc">
+                        {{movieInfo.description}}
+                    </p>
+                </div>
             </div>
         </div>
+        <Transition name="fade">
+        <div class="detail-intro" v-if="show"></div>
+        </Transition>
     </div>
 </template>
 
 <script>
     import {
-        computed
+        computed,
+        onMounted,
+        onUpdated,
+        ref
     } from 'vue';
     // router 를 통해서 전송받은 데이터 활용
     import {
@@ -38,21 +42,41 @@
         useStore
     } from 'vuex'
     export default {
-        setup() {
+        setup(props, context) {
             const route = useRoute() // router , route 구분
             const id = route.params.id; // router index에서 id로 받기로했기에
             // 상세정보 호출
             const store = useStore();
+            // console.log('문제발생',id) 새로고침의 문제 Persistent 설치?
             store.dispatch('fetchMovieInfo', id);
+
             const movieInfo = computed(() => store.getters.getMovieInfo);
             const router = useRouter();
             const back = () => {
-                router.push('/');
+                router.push('/page-ghibli/');
             }
+            const show = ref(true);
+
+            onMounted(() => {
+                // 스크롤바를 최상단으로 이동시킨다.
+                window.scrollTo(0, 0);
+                document.querySelector('html').style.overflowY = 'hidden';
+            })
+            onUpdated(() => {
+                // show.value = false
+                document.querySelector('html').style.overflowY = 'auto';
+                context.emit('hide');
+            })
+            
+            const delay = setTimeout(()=>{
+                clearTimeout(delay)
+                show.value = false
+            },1500)
+
             return {
                 id,
                 movieInfo,
-                back
+                back,show
             }
         }
     }
@@ -67,7 +91,9 @@
     }
 
     .a-back {
-        position: relative;
+        position: absolute;
+        right: 0;
+        top: -65px;
         display: block;
         float: right;
         margin-top: 10px;
@@ -78,6 +104,8 @@
         border: 1px solid #000;
         text-transform: uppercase;
         cursor: pointer;
+        z-index: 99;
+        font-weight: 700;
     }
 
     .movie-detail {
@@ -156,6 +184,26 @@
         margin-bottom: 20px;
     }
 
+    .detail-intro {
+        position: fixed;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        width: 90%;
+        height: 90%;
+        background: url('@/assets/detailintro.gif') no-repeat center;
+        background-size: cover;
+        z-index: 99;
+    }
+  .fade-enter-active,
+  .fade-leave-active {
+    transition: opacity 1s ease;
+  }
+
+  .fade-enter-from,
+  .fade-leave-to {
+    opacity: 0;
+  }
 
     @media screen and (max-width:1000px) {
         .movie-image {

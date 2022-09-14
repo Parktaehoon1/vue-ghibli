@@ -19,7 +19,7 @@ export default {
         const router = useRouter();
         const detailMove = () => {
             // props 를 참조하고자 할때는 setup(props)를 활용
-            router.push('/detail/' + props.propsdata.id)
+            router.push('/page-ghibli/detail/' + props.propsdata.id)
         }
         return{
             detailMove
@@ -28,7 +28,6 @@ export default {
     
 }
 </script>
-
 <style scoped>
 .movie-box{
     position: relative;
@@ -76,5 +75,26 @@ export default {
     font-size: 12px;
     line-height: 1.25;
     color: #333;
+}
+
+@media screen and (max-width:1200px) {
+.a-img img{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 100%;
+}    
+}
+@media screen and (max-width:1000px) {
+.a-img img{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 100%;
+}    
 }
 </style>

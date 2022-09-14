@@ -1,5 +1,8 @@
 <template>
-  <header>
+  <header class="header">
+    <div class="logo-wrap">
+    <a href="https://www.ghibli.jp/" target="_blank"></a>
+    </div>
     <h2>Studio Ghibli</h2>
   </header>
 </template>
@@ -11,12 +14,41 @@ export default {
 </script>
 
 <style scoped>
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
+    .header{
+      position: relative;
+      display: flex;
+    }
+    .logo-wrap{
+      position: relative;
+      display: block;
+      width: 100px;
+      height: 70px;
+      margin-left: 20px;
+    }
+    
     h2{
-        position: relative;
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        height: 70px;
+        line-height: 70px;
         display: block;
         text-align: center;
         font-size: 30px;
-        margin: 20px 0;
+        font-weight: 800;
+        font-family: 'Roboto';
+        text-transform: uppercase;
         background: transparent;
+        z-index: 9;
+    }
+    a{
+      position: relative;
+      display: block;
+      width: 100%;
+      height: 100%;
+      background: url('@/assets/sitelogo.png') no-repeat center;
+      background-size: contain;
+      z-index: 99;
     }
 </style>
