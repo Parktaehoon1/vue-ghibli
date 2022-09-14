@@ -1,5 +1,6 @@
 <template>
 <div class="wrap">
+  <HeaderView />
   <div class="container">
   <RouterView /> 
   </div>
@@ -8,8 +9,10 @@
 
 <script>
   import { useStore } from 'vuex';
+  import HeaderView from './components/HeaderView.vue'
   export default {
     components:{
+      HeaderView
     },
     setup() {
       // vuex에 dispatch 전송

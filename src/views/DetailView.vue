@@ -39,7 +39,7 @@
     } from 'vuex'
     export default {
         setup() {
-            const route = useRoute()
+            const route = useRoute() // router , route 구분
             const id = route.params.id; // router index에서 id로 받기로했기에
             // 상세정보 호출
             const store = useStore();
