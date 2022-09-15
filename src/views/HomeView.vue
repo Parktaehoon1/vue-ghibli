@@ -24,7 +24,6 @@
             MovieList
         },
         setup(props, context) {
-            
             const store = useStore();
             // 처음에는 computed 가 결과가 없는 상태
             const movieList = computed(() => store.getters.getMovieList)
@@ -32,7 +31,8 @@
 
             const gotop = ref(null)
             onMounted(() => { //ref 참조할때는 요롷게~~ 
-                console.log(gotop.value)
+                // console.log(gotop.value)
+                
             })
             // axios 실행 > vuex : mutation 실행
             
@@ -42,6 +42,7 @@
                     clearTimeout(delay); // clearTimeout 때문에 변수에 담은 거임
                     context.emit('hide'); // emit은 엄마의 이벤트 네임을 줘야됨
                 }, 1500)
+
             })
 
             const moveTop = () => {
@@ -50,11 +51,30 @@
                     left: 0,
                     behavior: 'smooth'
                 });
+                const gotop = document.querySelector('.gotop')
+                const gotopY = window.scrollY;
+
+                if(gotopY < 400){
+                    gotop.style.opacity = "1"
+                } else {
+                    gotop.style.opacity = "0"
+                }
+               let delay = setTimeout(() => {
+                    clearTimeout(delay); // clearTimeout 때문에 변수에 담은 거임
+                    gotop.style.opacity = "1"
+                }, 3000)
+                console.log(gotopY);
+
+                // 임시방편으로ㅠ
             }
+
+
+
             return {
                 movieList,
                 gotop,
                 moveTop,
+                // status
             }
         }
     }
@@ -90,6 +110,7 @@
         z-index: 9;
         border: 0;
         border-radius: 10px;
+        transition: all 0.5s;
     }
 
     @media all and (max-width:1200px) {

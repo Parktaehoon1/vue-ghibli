@@ -24,7 +24,7 @@ export default {
       display: block;
       width: 100px;
       height: 70px;
-      margin-left: 20px;
+      margin-left: 30px;
     }
     
     h2{
@@ -47,7 +47,7 @@ export default {
       display: block;
       width: 100%;
       height: 100%;
-      background: url('@/assets/sitelogo.png') no-repeat center;
+      background: url('@/assets/Studio_Ghibli.webp') no-repeat center;
       background-size: contain;
       z-index: 99;
     }

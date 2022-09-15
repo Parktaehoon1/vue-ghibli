@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="movie-box">
-            <a class="a-back" @click.stop="back">all list</a>
+            <a class="a-back" @click.stop="back"><i class="fas fa-long-arrow-left"></i></a>
             <div class="movie-detail">
                 <img class="movie-image" :src="movieInfo.image">
                 <div class="movie-info-wrap">
@@ -53,7 +53,12 @@
             const movieInfo = computed(() => store.getters.getMovieInfo);
             const router = useRouter();
             const back = () => {
-                router.push('/page-ghibli/');
+                const delay = setTimeout(() => {
+                    clearTimeout(delay)
+                    router.push('/page-ghibli/');
+                }, 1000)
+                
+                document.querySelector('.a-back').style.border = '1px solid rgba(0, 0, 0, 0)'
             }
             const show = ref(true);
 
@@ -100,12 +105,16 @@
         margin-right: 20px;
         padding: 10px;
         background: transparent;
-        border-radius: 8px;
-        border: 1px solid #000;
+        border-radius: 50%;
+        border: 1px solid rgba(0, 0, 0, 0.3);
         text-transform: uppercase;
         cursor: pointer;
         z-index: 99;
         font-weight: 700;
+        transition: all 0.8s;
+    }
+    .a-back:hover{
+        border: 1px solid rgba(0,0,0,1);
     }
 
     .movie-detail {
@@ -186,12 +195,11 @@
 
     .detail-intro {
         position: fixed;
-        left: 50%;
-        top: 50%;
-        transform: translate(-50%, -50%);
-        width: 90%;
-        height: 90%;
-        background: url('@/assets/detailintro.gif') no-repeat center;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background: url('@/assets/subintro.jpg') no-repeat center;
         background-size: cover;
         z-index: 99;
     }

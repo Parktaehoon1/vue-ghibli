@@ -75,7 +75,7 @@
 
 /* 스크롤바의 전체 배경색 */
 ::-webkit-scrollbar-thumb {
-    background: linear-gradient(to bottom, #000, #fff);
+    background: linear-gradient(to bottom, #fff, #000, #fff);
 }
 
 /* 스크롤바 색 */
@@ -86,7 +86,7 @@
   html {
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     font-size: 16px;
-    background: #eff3f7;
+    background: rgba(0,0,0,0.03);
     overflow-x: hidden;
     overflow-y: hidden;
   }

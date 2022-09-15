@@ -1,11 +1,26 @@
 import { createStore } from "vuex"
 import { fetchAllApi,fetchDetailInfo } from '../api/index'
+const storage = {
+    getData() {
+        const arr = [];
+        const total = localStorage.length;
+        if (total > 0) {
+            for (let i = 0; i < total; i++) {
+                // 추후 DB 연동 예정
+                let obj = localStorage.getItem(localStorage.key(i));
+                arr.push(JSON.parse(obj));
+            }
+        }
+        return arr;
+    }
+};
 export default createStore({
-    // 데이터
-    state:{
+    state :{
         movieList:[],
-        movieInfo:{}
+        movieInfo:{},
+        movieLocal: storage.getData()
     },
+
     // API 연동
     actions:{
         fetchMovieList({commit}){
@@ -21,11 +36,17 @@ export default createStore({
             fetchDetailInfo(_id)
             .then(res => {
                 commit('MOVIE_INFO', res.data)
+                console.log("id를 받아오나",res.data)
             })
             .catch(
                 err => console.log(err)
             )
+        },
+        fetchUpdateMemo({commit}, obj){
+            commit("UPDATE_MEMO", obj);
+            console.log("객체",obj)
         }
+
     },
     // 데이터 저장
     mutations:{
@@ -35,6 +56,29 @@ export default createStore({
         },
         MOVIE_INFO(state, payload){
             state.movieInfo = payload
+        },
+        UPDATE_MEMO(state, payload){
+        console.log("state",state)
+        console.log("payload",payload)
+        
+        let movieTemp = {
+            id: payload.id,
+            complete: false,
+        };
+        localStorage.setItem(movieTemp.id, JSON.stringify(movieTemp));
+        state.movieLocal.push(movieTemp);
+        state.movieLocal[payload.id] = !state.movieLocal[payload.id];
+
+
+        localStorage.setItem(payload.id, JSON.stringify(payload));
+
+        localStorage.removeItem(payload.id);
+
+        // state.movieLocal[payload.id].complete = !state.movieLocal[payload.id].complete;
+
+        localStorage.setItem(payload.id, JSON.stringify(payload.item));
+
+
         }
     },
     // 데이터 참조
