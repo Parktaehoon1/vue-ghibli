@@ -4,10 +4,13 @@
   <div class="wrap">
     <HeaderView />
     <div class="container">
+      
       <Transition name="fade">
         <div class="intro" v-if="show"></div>
       </Transition>
+
       <RouterView @hide="hideIntro" />
+
     </div>
   </div>
 </template>
