@@ -18,6 +18,8 @@ export default {
     .header{
       position: relative;
       display: flex;
+      align-items: center;
+      height: 100px;
     }
     .logo-wrap{
       position: relative;
@@ -48,7 +50,7 @@ export default {
       display: block;
       width: 100%;
       height: 100%;
-      background: url('@/assets/Studio_Ghibli.webp') no-repeat center;
+      background: url('@/assets/second-logo.png') no-repeat center;
       background-size: contain;
       z-index: 99;
     }

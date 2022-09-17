@@ -9,7 +9,7 @@
 
     </Swiper>
 
-    <button class="gotop" @click="moveTop"><i class="fas fa-arrow-up"></i></button>
+    <!-- <button class="gotop" @cli ck="moveTop"><i class="fas fa-arrow-up"></i></button> -->
 
 </template>
 

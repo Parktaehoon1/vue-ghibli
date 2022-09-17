@@ -10,7 +10,13 @@
                 {{propsdata.title}}<small>{{propsdata.original_title}}</small></h2>
             <p class="a-desc">{{propsdata.description}}</p>
         </a>
-    <i class="fas fa-check check-bt" :class="{movieComplete:propsdata.complete}" @click="updateMemo(propsdata)"></i>
+        <p class="a-desc-list">
+            Release Date : {{propsdata.release_date}}년<br />
+            Director : {{propsdata.director}}<br />
+            Producer : {{propsdata.producer}}<br />
+            Running Time : {{propsdata.running_time}}분
+        </p>
+        <i class="fas fa-check check-bt" :class="{movieComplete:propsdata.complete}" @click="updateMemo(propsdata)"></i>
     </div>
 </template>
 
@@ -31,7 +37,7 @@
             }
 
             const updateMemo = (propsdata) => {
-                console.log("id값",propsdata.id)
+                console.log("id값", propsdata.id)
             }
             return {
                 detailMove,
@@ -45,16 +51,20 @@
     .movie-box {
         position: relative;
         display: block;
+        width: 90%;
+        height: 100%;
     }
-    .movie-title{
+
+    .movie-title {
         position: relative;
         display: block;
         text-align: center;
-        bottom:15px;
+        bottom: 15px;
         font-size: 22px;
         font-weight: 700;
-        color: #999;
+        color: #e9e9e9;
     }
+
     .movie-box a {
         position: relative;
         display: block;
@@ -79,7 +89,7 @@
 
     .a-title {
         position: relative;
-        display: block;
+        display: none;
         margin: 20px 0;
         font-size: 18px;
     }
@@ -101,14 +111,26 @@
         color: #333;
     }
 
-	.check-bt {
-		color: #62acde;
-		line-height: 50px;
-		margin-right: 10px;
-		cursor: pointer;
-	}
-    .movieComplete{
+    .check-bt {
+        position: absolute;
+        right: 0;
+        bottom: 15%;
+        color: #62acde;
+        line-height: 50px;
+        margin-right: 10px;
+        cursor: pointer;
+    }
+
+    .movieComplete {
         color: red;
+    }
+
+    .a-desc-list{
+        position: relative;
+        display: block;
+        margin-top: 10px;
+        font-size: 16px;
+        color: #e9e9e9;
     }
 
     @media screen and (max-width:1200px) {
