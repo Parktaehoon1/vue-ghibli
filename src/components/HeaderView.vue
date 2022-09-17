@@ -33,6 +33,7 @@ export default {
         transform: translateX(-50%);
         height: 70px;
         line-height: 70px;
+        color: #e9e9e9;
         display: block;
         text-align: center;
         font-size: 30px;

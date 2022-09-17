@@ -5,9 +5,9 @@
     <HeaderView />
     <div class="container">
       
-      <Transition name="fade">
+      <!-- <Transition name="fade">
         <div class="intro" v-if="show"></div>
-      </Transition>
+      </Transition> -->
 
       <RouterView @hide="hideIntro" />
 
@@ -89,16 +89,16 @@
   html {
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     font-size: 16px;
-    background: rgba(0,0,0,0.03);
+	background: radial-gradient( circle, #333, #333, #000 );
     overflow-x: hidden;
     overflow-y: hidden;
   }
 
   .wrap {
-    position: absolute;
-    left: 0;
-    top: 0;
+    position: relative;
     display: block;
+    width: 1200px;
+    margin: 0 auto;
   }
 
   .container {

@@ -1,14 +1,31 @@
 <template>
-    <div class="movie" v-for="(item, index) in movieList" :key="index">
-        <MovieList :propsdata="item" />
-        <!--여기서 item은 v-for의 아이템 -->
-    </div>
+
+    <Swiper :effect="'cards'" :grabCursor="true" :modules="modules" class="sw-movie">
+
+        <swiper-slide class="movie" v-for="(item, index) in movieList" :key="index">
+            <MovieList :propsdata="item" />
+            <!--여기서 item은 v-for의 아이템 -->
+        </swiper-slide>
+
+    </Swiper>
 
     <button class="gotop" @click="moveTop"><i class="fas fa-arrow-up"></i></button>
 
 </template>
 
 <script>
+    import {
+        Swiper,
+        SwiperSlide
+    } from "swiper/vue";
+    import "swiper/css";
+
+    import "swiper/css/effect-cards";
+
+    import {
+        EffectCards
+    } from "swiper";
+
     import {
         computed,
         onUpdated,
@@ -21,7 +38,9 @@
     import MovieList from '../components/MovieList.vue'
     export default {
         components: {
-            MovieList
+            MovieList,
+            Swiper,
+            SwiperSlide,
         },
         setup(props, context) {
             const store = useStore();
@@ -32,10 +51,10 @@
             const gotop = ref(null)
             onMounted(() => { //ref 참조할때는 요롷게~~ 
                 // console.log(gotop.value)
-                
+
             })
             // axios 실행 > vuex : mutation 실행
-            
+
             onUpdated(() => {
                 // 내용물이 최종 업데이트가 되었다면 App 으로 intro 화면 사라지라고 부탁해야됨
                 let delay = setTimeout(() => {
@@ -54,12 +73,12 @@
                 const gotop = document.querySelector('.gotop')
                 const gotopY = window.scrollY;
 
-                if(gotopY < 400){
+                if (gotopY < 400) {
                     gotop.style.opacity = "1"
                 } else {
                     gotop.style.opacity = "0"
                 }
-               let delay = setTimeout(() => {
+                let delay = setTimeout(() => {
                     clearTimeout(delay); // clearTimeout 때문에 변수에 담은 거임
                     gotop.style.opacity = "1"
                 }, 3000)
@@ -74,6 +93,7 @@
                 movieList,
                 gotop,
                 moveTop,
+                modules: [EffectCards],
                 // status
             }
         }
@@ -112,6 +132,79 @@
         border-radius: 10px;
         transition: all 0.5s;
     }
+
+    .sw-movie {
+        position: relative;
+        display: block;
+    }
+
+    .swiper {
+        width: 400px;
+        height: 600px;
+    }
+
+    .swiper-slide {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 18px;
+        font-size: 22px;
+        font-weight: bold;
+        color: #fff;
+    }
+
+    .swiper-slide:nth-child(1n) {
+        /* background-color: rgb(206, 17, 17); */
+        background-color: rgb(0, 0, 0);
+    }
+
+    .swiper-slide:nth-child(2n) {
+        /* background-color: rgb(0, 140, 255); */
+        background-color: rgb(10, 10, 10);
+
+    }
+
+    .swiper-slide:nth-child(3n) {
+        /* background-color: rgb(10, 184, 111); */
+        background-color: rgb(20, 20, 20);
+    }
+
+    .swiper-slide:nth-child(4n) {
+        /* background-color: rgb(211, 122, 7); */
+        background-color: rgb(30, 30, 30);
+    }
+
+    .swiper-slide:nth-child(5n) {
+        /* background-color: rgb(118, 163, 12); */
+        background-color: rgb(40, 40, 40);
+
+    }
+
+    .swiper-slide:nth-child(6n) {
+        /* background-color: rgb(180, 10, 47); */
+        background-color: rgb(50, 50, 50);
+    }
+
+    .swiper-slide:nth-child(7n) {
+        /* background-color: rgb(35, 99, 19); */
+        background-color: rgb(60, 60, 60);
+    }
+
+    .swiper-slide:nth-child(8n) {
+        /* background-color: rgb(0, 68, 255); */
+        background-color: rgb(70, 70, 70);
+    }
+
+    .swiper-slide:nth-child(9n) {
+        /* background-color: rgb(218, 12, 218); */
+        background-color: rgb(80, 80, 80);
+    }
+
+    .swiper-slide:nth-child(10n) {
+        /* background-color: rgb(54, 94, 77); */
+        background-color: rgb(90, 90, 90);
+    }
+
 
     @media all and (max-width:1200px) {
         .movie {

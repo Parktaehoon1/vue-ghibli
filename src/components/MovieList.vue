@@ -2,6 +2,7 @@
     <div class="movie-box">
 
         <a @click.stop="detailMove">
+            <p class="movie-title">{{propsdata.title}}</p>
             <div class="a-img">
                 <img :src="propsdata.image">
             </div>
@@ -45,7 +46,15 @@
         position: relative;
         display: block;
     }
-
+    .movie-title{
+        position: relative;
+        display: block;
+        text-align: center;
+        bottom:15px;
+        font-size: 22px;
+        font-weight: 700;
+        color: #999;
+    }
     .movie-box a {
         position: relative;
         display: block;
@@ -85,7 +94,7 @@
 
     .a-desc {
         position: relative;
-        display: block;
+        display: none;
         margin-bottom: 20px;
         font-size: 12px;
         line-height: 1.25;
