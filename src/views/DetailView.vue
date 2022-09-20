@@ -106,7 +106,7 @@
         padding: 10px;
         background: transparent;
         border-radius: 50%;
-        border: 1px solid rgba(0, 0, 0, 0.3);
+        border: 1px solid rgba(255, 255, 255, 0.8);
         text-transform: uppercase;
         cursor: pointer;
         z-index: 99;
@@ -114,7 +114,11 @@
         transition: all 0.8s;
     }
     .a-back:hover{
-        border: 1px solid rgba(0,0,0,1);
+        border: 1px solid rgba(255,255,255,1);
+    }
+
+    .fas{
+        color: #fff;
     }
 
     .movie-detail {
